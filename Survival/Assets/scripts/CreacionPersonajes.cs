@@ -10,22 +10,19 @@ public class CreacionPersonajes : MonoBehaviour
 
     void Start()
     {
-        nombres = new string[] { "octavio", "rosendo", "geremias", "evaristo", "rogelio", "leocadio", "ansizar", "marinela", "juaquina", "berta", "jacinta", "casemira", "eusebio", "ramona", "flavio", "celina", "reutilio", "lola", "celia", "condorito" };
-        //GameObject personajePpal = GameObject.Instantiate(tipoPersonaje) as GameObject;
-        //personajePpal.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-        //pos = new Vector3(Random.Range(0, 100), 0.5f, Random.Range(0, 100));
-        //personajePpal.transform.position = pos;
+        nombres = new string[] { "octavio", "rosendo", "geremias", "evaristo", "rogelio", "leocadio", "ansizar", "marinela", "juaquina", "berta", "jacinta", "casemira", "eusebio", "ramona", "flavio", "celina", "reutilio", "lola", "celia", "condorito" }; //para dar nombre a los ciudadanos
+        
         PersPrinciapal personajePpal = new PersPrinciapal(tipoPersonaje);
 
         int numZombies = Random.Range(4, 10);
-        for (int i = 0; i < numZombies; i++)
+        for (int i = 0; i < numZombies; i++) //para crear los zombies
         {
             Zombie creaZombies = new Zombie();
             
         }
 
         int numPersonas = Random.Range(0, 10 - numZombies);
-        for (int i = 0; i < numPersonas; i++)
+        for (int i = 0; i < numPersonas; i++) //para crear los ciudadanos
         {
             int ponerNombre = Random.Range(0, 20);
             string nombrCiud = nombres[ponerNombre];
@@ -34,20 +31,12 @@ public class CreacionPersonajes : MonoBehaviour
     }
 
     
-    void Update()
-    {
-        bool aKey = Input.GetKey(KeyCode.A);
-        bool sKey = Input.GetKey(KeyCode.S);
-        bool wKey = Input.GetKey(KeyCode.W);
-        bool dKey = Input.GetKey(KeyCode.D);
-        //transform.position = pos;
-    }
 
-    class PersPrinciapal
+    class PersPrinciapal //clase para la creacion del heroe
     {
         GameObject personajePpal;
 
-        public PersPrinciapal(GameObject tipPers)
+        public PersPrinciapal(GameObject tipPers) //constructor de clase
         {
             personajePpal = GameObject.Instantiate(tipPers) as GameObject;
             personajePpal.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
@@ -57,15 +46,15 @@ public class CreacionPersonajes : MonoBehaviour
         }
     }
 
-    class Zombie
+    class Zombie //clase para la creacion de zombies
     {
-        public Zombie()
+        public Zombie() //constructor de clase 
         {
             int cambioColor = Random.Range(1, 4);
             GameObject objZombie;
             Vector3 pos = new Vector3(Random.Range(1, 100), 0.5f, Random.Range(1, 100));
 
-            switch (cambioColor)
+            switch (cambioColor) //switch para dar color al zombie segun variable cambioColor
             {
                 case 1:
                     objZombie = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -83,9 +72,9 @@ public class CreacionPersonajes : MonoBehaviour
                     objZombie.GetComponent<Renderer>().material.color = Color.magenta;
                     break;
             }
-            print(DarMensaje(cambioColor));
+            print(DarMensaje(cambioColor)); // llama funcion para dar mensaje
         }
-        string DarMensaje(int colorcito)
+        string DarMensaje(int colorcito) //funcion para mostrar mensaje
         {
             string mensaje = null;
             if (colorcito == 1)
@@ -104,21 +93,21 @@ public class CreacionPersonajes : MonoBehaviour
         }
     }
 
-    class ciudadano
+    class ciudadano //clase para creacion de ciudadanos
     {
         int edad;
         GameObject objCiudadano;
         Vector3 pos = new Vector3(Random.Range(1, 100), 0.5f, Random.Range(1, 100));
-        public ciudadano(string nombr)
+        public ciudadano(string nombr) //constructor de clase
         {
             objCiudadano = GameObject.CreatePrimitive(PrimitiveType.Cube);
             objCiudadano.transform.position = pos;
             objCiudadano.GetComponent<Renderer>().material.color = Color.blue;
             objCiudadano.name = nombr;
             edad = Random.Range(15, 101);
-            print(DarMensaje(objCiudadano, edad));
+            print(DarMensaje(objCiudadano, edad)); //llama funcion para dar mensaje
         }
-        string DarMensaje(GameObject ciudadano, int edd)
+        string DarMensaje(GameObject ciudadano, int edd) //funcion para mostrar mensaje
         {
             string cambioEdad = edd.ToString();
             string nombr = ciudadano.name;
